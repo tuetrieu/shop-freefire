@@ -3,86 +3,319 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop Cho Thuê Acc Free Fire</title>
+    <title>Shoptinhtue.com - Thuê & Mua Acc Free Fire VIP</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
-        body { background-color: #f4f7f6; color: #333; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        body { background-color: #f4f7f6; color: #333; padding-bottom: 75px; }
         
         /* Header */
-        header { background: #fff; padding: 15px; border-bottom: 1px solid #ddd; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
-        .logo { font-weight: bold; color: #ff4500; font-size: 18px; }
-        .auth-buttons { display: flex; gap: 10px; }
-        .btn-login { border: none; padding: 8px 15px; border-radius: 20px; color: #555; background: #f0f0f0; }
-        .btn-register { border: none; padding: 8px 15px; border-radius: 20px; color: #fff; background: #6c5ce7; }
+        header { background: #fff; padding: 12px 16px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .logo { font-weight: 900; color: #ff4500; font-size: 18px; cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px; }
+        .nav-right { display: flex; gap: 8px; align-items: center; }
+        .btn-header { border: none; padding: 7px 12px; border-radius: 20px; font-weight: 600; font-size: 13px; cursor: pointer; }
+        .btn-login { color: #555; background: #f0f0f0; }
+        .btn-nap { color: #fff; background: #2ecc71; }
+        .user-info { font-size: 13px; font-weight: bold; color: #6c5ce7; display: none; cursor: pointer; }
 
-        /* Banner & Title */
-        .page-title { padding: 20px; background: #fff; }
-        .page-title h1 { font-size: 20px; margin-bottom: 10px; color: #333; }
-        
+        /* Bottom Nav */
+        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: #fff; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #ddd; z-index: 99; }
+        .nav-item { text-align: center; font-size: 11px; color: #666; cursor: pointer; font-weight: 600; }
+        .nav-item.active { color: #6c5ce7; }
+
+        /* Pages */
+        .page { display: none; padding: 15px; max-width: 600px; margin: 0 auto; }
+        .page.active { display: block; }
+
+        /* Banner GIF */
+        .banner-gif { width: 100%; border-radius: 12px; overflow: hidden; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .banner-gif img { width: 100%; height: 140px; object-fit: cover; display: block; }
+
         /* Product Grid */
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; padding: 15px; }
-        .product-card { background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .product-card img { width: 100%; height: 180px; object-fit: cover; }
-        .product-info { padding: 15px; }
-        .product-id-and-status { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-        .product-id { font-size: 14px; font-weight: bold; color: #555; background: #f0f0f0; padding: 5px 10px; border-radius: 5px; }
-        .product-status { font-size: 13px; font-weight: bold; color: #2ecc71; display: flex; align-items: center; }
-        .product-status::before { content: "•"; margin-right: 5px; font-size: 16px; }
-        .product-desc { font-size: 15px; color: #333; margin-bottom: 10px; height: 36px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
-        .product-price { font-size: 16px; font-weight: bold; color: #555; display: flex; justify-content: space-between; align-items: baseline; }
-        .product-price span { font-size: 18px; color: #6c5ce7; }
-        
-        /* Floating Chat Button */
-        .chat-bubble { position: fixed; bottom: 30px; right: 30px; background: #6c5ce7; color: #fff; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 24px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        .product-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        .product-card { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); cursor: pointer; transition: transform 0.2s; }
+        .product-card:active { transform: scale(0.98); }
+        .product-card img { width: 100%; height: 120px; object-fit: cover; display: block; }
+        .product-info { padding: 10px; }
+        .product-id-status { display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 6px; }
+        .product-id { font-weight: bold; background: #f0f0f0; padding: 2px 6px; border-radius: 4px; color: #444; }
+        .product-status { color: #2ecc71; font-weight: bold; }
+        .product-title { font-size: 13px; font-weight: bold; margin-bottom: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #222; }
+        .product-price { font-size: 14px; color: #ff4500; font-weight: bold; }
+
+        /* Popup Modal */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 200; justify-content: center; align-items: center; padding: 15px; }
+        .modal-content { background: white; padding: 20px; border-radius: 14px; width: 100%; max-width: 400px; max-height: 90vh; overflow-y: auto; }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; font-weight: bold; font-size: 16px; }
+        .close-btn { cursor: pointer; font-size: 22px; color: #888; }
+
+        /* Forms */
+        .form-group { margin-bottom: 12px; }
+        .form-group label { display: block; font-size: 12px; font-weight: bold; margin-bottom: 5px; color: #555; }
+        .form-group input, .form-group select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 8px; font-size: 14px; outline: none; }
+        .btn-submit { width: 100%; padding: 12px; background: #6c5ce7; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 10px; font-size: 14px; }
+        .btn-submit.green { background: #2ecc71; }
+
+        /* Bank & QR */
+        .qr-box { text-align: center; background: #fff; padding: 15px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        .qr-box img { width: 100%; max-width: 240px; border-radius: 8px; margin: 10px 0; }
+        .bank-info { background: #f8f9fa; padding: 12px; border-radius: 8px; text-align: left; font-size: 13px; line-height: 1.7; border: 1px dashed #6c5ce7; }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo">SHOPLMCFF.COM</div>
-        <div class="auth-buttons">
-            <button class="btn-login">Đăng nhập</button>
-            <button class="btn-register">Đăng ký</button>
+        <div class="logo" onclick="switchTab('home')">Shoptinhtue.com</div>
+        <div class="nav-right">
+            <button class="btn-header btn-nap" onclick="switchTab('nap')">Nạp tiền</button>
+            <div id="authBtns">
+                <button class="btn-header btn-login" onclick="openModal('loginModal')">Đăng nhập</button>
+            </div>
+            <div class="user-info" id="userInfo" onclick="switchTab('profile')"></div>
         </div>
     </header>
 
-    <div class="page-title">
-        <h1>Thuê Acc Free Fire</h1>
-        <!-- Bộ lọc sẽ nằm ở đây -->
+    <div id="home" class="page active">
+        <div class="banner-gif">
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Z6eHdqY2Z6eHdqY2Z6eHdqY2Z6eHdqY2Z6eHdqY2Z6eHdqYyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/L1R1tvI9svvC0/giphy.gif" alt="Free Fire Banner GIF">
+        </div>
+
+        <h4 style="margin-bottom: 12px; font-size: 15px; color: #111;">🔥 Tài Khoản Free Fire Nổi Bật</h4>
+        <div class="product-grid" id="productGrid"></div>
     </div>
 
-    <div class="product-grid">
-        <!-- Thẻ Account 1 -->
-        <div class="product-card">
-            <img src="https://via.placeholder.com/300x180/ff4500/ffffff?text=Acc+Freefire+VIP" alt="Acc Free Fire">
-            <div class="product-info">
-                <div class="product-id-and-status">
-                    <div class="product-id">#FBT48E</div>
-                    <div class="product-status">Còn hàng</div>
-                </div>
-                <div class="product-desc">VIP 4 • AK Rồng Xanh • Rank Thách Đấu</div>
-                <div class="product-price">
-                    25.000đ<span>/6 giờ</span>
-                </div>
+    <div id="nap" class="page">
+        <h3 style="margin-bottom: 15px; font-size: 16px;">Chọn phương thức nạp tiền</h3>
+        
+        <div class="qr-box" style="margin-bottom: 20px;">
+            <h4 style="color: #6c5ce7;">1. Nạp qua Mã QR MB Bank (Tự động)</h4>
+            <p style="font-size: 12px; color: #666; margin-top: 4px;">Mở App Ngân hàng bất kỳ để quét mã QR</p>
+            <img src="https://img.vietqr.io/image/MB-03435266778899-compact2.jpg?accountName=TRIEU%20TINH%20TUE" alt="QR VietQR MB Bank">
+            <div class="bank-info">
+                <p><b>Ngân hàng:</b> MB Bank (Quân Đội)</p>
+                <p><b>Số tài khoản:</b> <span style="color: #ff4500; font-weight: bold;">03435266778899</span></p>
+                <p><b>Chủ tài khoản:</b> TRIEU TINH TUE</p>
+                <p><b>Nội dung chuyển khoản:</b> <span id="transferMemo" style="color: #6c5ce7; font-weight: bold;">NAP </span></p>
             </div>
         </div>
-        <!-- Thẻ Account 2 -->
-        <div class="product-card">
-            <img src="https://via.placeholder.com/300x180/2ecc71/ffffff?text=Acc+Freefire+Rank" alt="Acc Free Fire">
-            <div class="product-info">
-                <div class="product-id-and-status">
-                    <div class="product-id">#8GF4R6</div>
-                    <div class="product-status">Còn hàng</div>
+
+        <div class="qr-box">
+            <h4 style="color: #2ecc71; margin-bottom: 10px;">2. Nạp qua Thẻ Cào Điện Thoại / Game</h4>
+            <form id="cardForm">
+                <div class="form-group">
+                    <label>Loại thẻ</label>
+                    <select id="cardType">
+                        <option value="VIETTEL">Viettel</option>
+                        <option value="VINAPHONE">VinaPhone</option>
+                        <option value="MOBIFONE">MobiFone</option>
+                        <option value="GARENA">Garena</option>
+                        <option value="ZING">Zing</option>
+                    </select>
                 </div>
-                <div class="product-desc">VIP 6 • M1014 Long Tộc Max • Set Đồ VIP</div>
-                <div class="product-price">
-                    50.000đ<span>/24 giờ</span>
+                <div class="form-group">
+                    <label>Mệnh giá</label>
+                    <select id="cardValue">
+                        <option value="10000">10.000đ</option>
+                        <option value="20000">20.000đ</option>
+                        <option value="50000">50.000đ</option>
+                        <option value="100000">100.000đ</option>
+                        <option value="200000">200.000đ</option>
+                        <option value="500000">500.000đ</option>
+                    </select>
                 </div>
-            </div>
+                <div class="form-group">
+                    <label>Mã số thẻ</label>
+                    <input type="text" id="cardCode" placeholder="Nhập mã thẻ cào" required>
+                </div>
+                <div class="form-group">
+                    <label>Số Seri thẻ</label>
+                    <input type="text" id="cardSeri" placeholder="Nhập số seri" required>
+                </div>
+                <button type="submit" class="btn-submit green">Gửi Thẻ Nạp Ngay</button>
+            </form>
         </div>
     </div>
 
-    <div class="chat-bubble">💬</div>
+    <div id="profile" class="page">
+        <h3>Thông tin tài khoản</h3>
+        <div class="bank-info" style="margin-top: 15px;">
+            <p><b>Tên khách hàng:</b> <span id="profName"></span></p>
+            <p><b>Tài khoản email:</b> <span id="profAcc"></span></p>
+            <p><b>Số dư hiện tại:</b> <span id="profBalance" style="color: #2ecc71; font-weight: bold;">0đ</span></p>
+        </div>
+        <button class="btn-submit" style="background: #e74c3c; margin-top: 20px;" onclick="logout()">Đăng xuất tài khoản</button>
+    </div>
 
+    <div class="bottom-nav">
+        <div class="nav-item active" onclick="switchTab('home')">🏠<br>Trang chủ</div>
+        <div class="nav-item" onclick="switchTab('nap')">💳<br>Nạp tiền</div>
+        <div class="nav-item" onclick="switchTab('profile')">👤<br>Cá nhân</div>
+    </div>
+
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span>ĐĂNG NHẬP / ĐĂNG KÝ</span>
+                <span class="close-btn" onclick="closeModal('loginModal')">&times;</span>
+            </div>
+            <form id="authForm">
+                <div class="form-group">
+                    <label>Tài khoản Email / Số điện thoại</label>
+                    <input type="text" id="authAcc" required placeholder="Ví dụ: tinhtue2026@gmail.com">
+                </div>
+                <div class="form-group">
+                    <label>Mật khẩu</label>
+                    <input type="password" id="authPass" required placeholder="Nhập mật khẩu">
+                </div>
+                <button type="submit" class="btn-submit">Đăng nhập / Đăng ký</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="buyModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span>CHI TIẾT ACC GAME</span>
+                <span class="close-btn" onclick="closeModal('buyModal')">&times;</span>
+            </div>
+            <div id="buyModalBody"></div>
+        </div>
+    </div>
+
+    <script>
+        // Danh sách Acc Game trưng bày kèm ảnh đẹp & email/mật khẩu ảo
+        const accList = [
+            { id: "FBT48E", title: "VIP 4 • AK Rồng Xanh Lv7 • Quỷ Dạ Xoa", price: 50000, img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=500&q=80", email: "acc_ff_vip1@shoptinhtue.com", pass: "TinhtueVIP2026@" },
+            { id: "8GF4R6", title: "VIP 6 • M1014 Long Tộc Max • Set Đồ Độc", price: 100000, img: "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=500&q=80", email: "longtoc_max@shoptinhtue.com", pass: "LongTocMax999#" },
+            { id: "YQGG9J", title: "Rank Thách Đấu • Full Súng Tiến Hóa", price: 20000, img: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=500&q=80", email: "thachdau_ff@shoptinhtue.com", pass: "PassThachDau123" },
+            { id: "467MRB", title: "Acc Nữ Xinh • MP40 Mãng Xà Max Level", price: 30000, img: "https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=500&q=80", email: "mangxa_vip@shoptinhtue.com", pass: "MangXaFreeFire88" }
+        ];
+
+        let currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
+
+        function init() {
+            renderProducts();
+            updateUserUI();
+        }
+
+        function renderProducts() {
+            const grid = document.getElementById('productGrid');
+            grid.innerHTML = '';
+            accList.forEach(acc => {
+                grid.innerHTML += `
+                    <div class="product-card" onclick="openBuyModal('${acc.id}')">
+                        <img src="${acc.img}" alt="Acc Game">
+                        <div class="product-info">
+                            <div class="product-id-status">
+                                <span class="product-id">#${acc.id}</span>
+                                <span class="product-status">● Còn hàng</span>
+                            </div>
+                            <div class="product-title">${acc.title}</div>
+                            <div class="product-price">${acc.price.toLocaleString()}đ</div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            
+            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+            if(tabId === 'home') document.querySelectorAll('.nav-item')[0].classList.add('active');
+            if(tabId === 'nap') document.querySelectorAll('.nav-item')[1].classList.add('active');
+            if(tabId === 'profile') document.querySelectorAll('.nav-item')[2].classList.add('active');
+        }
+
+        function updateUserUI() {
+            if (currentUser) {
+                document.getElementById('authBtns').style.display = 'none';
+                const userInfo = document.getElementById('userInfo');
+                userInfo.style.display = 'block';
+                userInfo.innerText = `${currentUser.acc} (${(currentUser.balance || 0).toLocaleString()}đ)`;
+                
+                document.getElementById('profName').innerText = currentUser.acc;
+                document.getElementById('profAcc').innerText = currentUser.acc;
+                document.getElementById('profBalance').innerText = (currentUser.balance || 0).toLocaleString() + 'đ';
+                document.getElementById('transferMemo').innerText = `NAP ${currentUser.acc}`;
+            } else {
+                document.getElementById('authBtns').style.display = 'block';
+                document.getElementById('userInfo').style.display = 'none';
+                document.getElementById('transferMemo').innerText = `NAP [TàiKhoảnCủaBạn]`;
+            }
+        }
+
+        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+
+        function openBuyModal(accId) {
+            const acc = accList.find(a => a.id === accId);
+            const modalBody = document.getElementById('buyModalBody');
+            modalBody.innerHTML = `
+                <img src="${acc.img}" style="width:100%; height:160px; object-fit:cover; border-radius:8px; margin-bottom:10px;">
+                <h4 style="color:#111;">Mã Acc: #${acc.id}</h4>
+                <p style="font-size:13px; color:#555; margin: 5px 0;">${acc.title}</p>
+                <p style="font-size:16px; color:#ff4500; font-weight:bold; margin-bottom:15px;">Giá bán: ${acc.price.toLocaleString()}đ</p>
+                <button class="btn-submit" onclick="confirmBuy('${acc.id}')">XÁC NHẬN MUA NGAY</button>
+            `;
+            openModal('buyModal');
+        }
+
+        function confirmBuy(accId) {
+            if (!currentUser) {
+                alert("Vui lòng đăng nhập tài khoản trước khi mua!");
+                closeModal('buyModal');
+                openModal('loginModal');
+                return;
+            }
+
+            const acc = accList.find(a => a.id === accId);
+            if ((currentUser.balance || 0) < acc.price) {
+                alert("Số dư không đủ! Vui lòng nạp thêm tiền.");
+                closeModal('buyModal');
+                switchTab('nap');
+                return;
+            }
+
+            // Trừ tiền & xuất tài khoản/mật khẩu ảo
+            currentUser.balance -= acc.price;
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            updateUserUI();
+
+            alert(`🎉 MUA ACC THÀNH CÔNG!\n\nThông tin tài khoản game của bạn:\n- Email/Tài khoản: ${acc.email}\n- Mật khẩu: ${acc.pass}\n\nLưu ý: Đăng nhập vào game và đổi mật khẩu ngay nhé!`);
+            closeModal('buyModal');
+        }
+
+        document.getElementById('authForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const acc = document.getElementById('authAcc').value;
+            currentUser = { acc: acc, balance: 100000 }; // Tặng sẵn 100.000đ trải nghiệm
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            updateUserUI();
+            closeModal('loginModal');
+            alert(`Đăng nhập thành công! Hệ thống đã tặng sẵn 100.000đ vào số dư để bạn mua thử acc.`);
+        });
+
+        document.getElementById('cardForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (!currentUser) {
+                alert("Vui lòng đăng nhập trước khi nạp thẻ!");
+                openModal('loginModal');
+                return;
+            }
+            alert("Gửi thẻ cào thành công! Hệ thống đang xử lý duyệt thẻ trong 1-3 phút.");
+            document.getElementById('cardCode').value = '';
+            document.getElementById('cardSeri').value = '';
+        });
+
+        function logout() {
+            localStorage.removeItem('currentUser');
+            currentUser = null;
+            updateUserUI();
+            switchTab('home');
+        }
+
+        init();
+    </script>
 </body>
 </html>
