@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Cho Thuê Acc Free Fire</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
+        body { background-color: #f4f7f6; color: #333; }
+        
+        /* Header */
+        header { background: #fff; padding: 15px; border-bottom: 1px solid #ddd; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
+        .logo { font-weight: bold; color: #ff4500; font-size: 18px; }
+        .auth-buttons { display: flex; gap: 10px; }
+        .btn-login { border: none; padding: 8px 15px; border-radius: 20px; color: #555; background: #f0f0f0; }
+        .btn-register { border: none; padding: 8px 15px; border-radius: 20px; color: #fff; background: #6c5ce7; }
+
+        /* Banner & Title */
+        .page-title { padding: 20px; background: #fff; }
+        .page-title h1 { font-size: 20px; margin-bottom: 10px; color: #333; }
+        
+        /* Product Grid */
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; padding: 15px; }
+        .product-card { background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .product-card img { width: 100%; height: 180px; object-fit: cover; }
+        .product-info { padding: 15px; }
+        .product-id-and-status { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .product-id { font-size: 14px; font-weight: bold; color: #555; background: #f0f0f0; padding: 5px 10px; border-radius: 5px; }
+        .product-status { font-size: 13px; font-weight: bold; color: #2ecc71; display: flex; align-items: center; }
+        .product-status::before { content: "•"; margin-right: 5px; font-size: 16px; }
+        .product-desc { font-size: 15px; color: #333; margin-bottom: 10px; height: 36px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+        .product-price { font-size: 16px; font-weight: bold; color: #555; display: flex; justify-content: space-between; align-items: baseline; }
+        .product-price span { font-size: 18px; color: #6c5ce7; }
+        
+        /* Floating Chat Button */
+        .chat-bubble { position: fixed; bottom: 30px; right: 30px; background: #6c5ce7; color: #fff; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 24px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">SHOPLMCFF.COM</div>
+        <div class="auth-buttons">
+            <button class="btn-login">Đăng nhập</button>
+            <button class="btn-register">Đăng ký</button>
+        </div>
+    </header>
+
+    <div class="page-title">
+        <h1>Thuê Acc Free Fire</h1>
+        <!-- Bộ lọc sẽ nằm ở đây -->
+    </div>
+
+    <div class="product-grid">
+        <!-- Thẻ Account 1 -->
+        <div class="product-card">
+            <img src="https://via.placeholder.com/300x180/ff4500/ffffff?text=Acc+Freefire+VIP" alt="Acc Free Fire">
+            <div class="product-info">
+                <div class="product-id-and-status">
+                    <div class="product-id">#FBT48E</div>
+                    <div class="product-status">Còn hàng</div>
+                </div>
+                <div class="product-desc">VIP 4 • AK Rồng Xanh • Rank Thách Đấu</div>
+                <div class="product-price">
+                    25.000đ<span>/6 giờ</span>
+                </div>
+            </div>
+        </div>
+        <!-- Thẻ Account 2 -->
+        <div class="product-card">
+            <img src="https://via.placeholder.com/300x180/2ecc71/ffffff?text=Acc+Freefire+Rank" alt="Acc Free Fire">
+            <div class="product-info">
+                <div class="product-id-and-status">
+                    <div class="product-id">#8GF4R6</div>
+                    <div class="product-status">Còn hàng</div>
+                </div>
+                <div class="product-desc">VIP 6 • M1014 Long Tộc Max • Set Đồ VIP</div>
+                <div class="product-price">
+                    50.000đ<span>/24 giờ</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="chat-bubble">💬</div>
+
+</body>
+</html>
